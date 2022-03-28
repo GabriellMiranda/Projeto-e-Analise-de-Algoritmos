@@ -1,0 +1,7 @@
+{
+    "C_Cpp.errorSquiggles": "Disabled",
+    "files.associations": {
+        "analisefrequencia.h": "c",
+        "criptografado.h": "c"
+    }
+}
