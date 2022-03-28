@@ -71,7 +71,7 @@ void preencherMapa(Mapa *mapa, char* nomeArquivo){
     }
 }
 
-// função movimentar, esta realizar o backitraking
+// função movimentar, esta realizar o backtraking
 int movimentar(Mapa *mapa, int i, int j,Pilha* pilha,char posAntiga,int opAntiga, modoAnalise *m, int nivel,int *ptr){
     m->quantidadeRecursao = *ptr;
     *ptr +=1;

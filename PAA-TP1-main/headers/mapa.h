@@ -9,11 +9,11 @@
 #include "modoAnalise.h"
 
 typedef struct{
-    char **mapa;
-    int linha;
-    int coluna;
-    Heroi heroi;
-    monstro U;
+    char **mapa; //mapa uma matriz
+    int linha; // linhas da matriz
+    int coluna; // linhas colunas
+    Heroi heroi; // caracteristicas dos heroi
+    monstro U; //caracteristicas dos monstros
     monstro T;
     monstro S;
     monstro B;
