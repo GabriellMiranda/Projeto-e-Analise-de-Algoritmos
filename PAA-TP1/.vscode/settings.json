@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "mapa.h": "c",
-        "monstro.h": "c",
-        "stdlib.h": "c",
-        "time.h": "c",
-        "modoanalise.h": "c"
-    }
-}
