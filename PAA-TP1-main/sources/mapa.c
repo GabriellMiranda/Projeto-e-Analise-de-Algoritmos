@@ -71,7 +71,7 @@ void preencherMapa(Mapa *mapa, char* nomeArquivo){
     }
 }
 
-
+// função movimentar, esta realizar o backitraking
 int movimentar(Mapa *mapa, int i, int j,Pilha* pilha,char posAntiga,int opAntiga, modoAnalise *m, int nivel,int *ptr){
     m->quantidadeRecursao = *ptr;
     *ptr +=1;
@@ -85,10 +85,11 @@ int movimentar(Mapa *mapa, int i, int j,Pilha* pilha,char posAntiga,int opAntiga
     int acabou=false;
     int teveLuta=false;
     char string[10000];
-    char aux = mapa->mapa[i][j];
+    char aux = mapa->mapa[i][j]; // aux recebendo a posição do mapa
     Item item;
     
-    int forca=mapa->heroi.forca;
+    //guardando o valores nas varíaves para caso haja alguma perca sempre ter os poderes anteriores
+    int forca=mapa->heroi.forca; 
     int kflash=mapa->heroi.kflash;
     int novaForca=forca;
     int novokFlash=kflash;
@@ -96,23 +97,23 @@ int movimentar(Mapa *mapa, int i, int j,Pilha* pilha,char posAntiga,int opAntiga
      //Marcando posição atual
     if(aux!=('+')) mapa->mapa[i][j]='X';
 
-    if(aux=='G'|| aux=='U' || aux=='S' || aux=='T' || aux=='B'){
-        if(aux=='G'){
+    if(aux=='G'|| aux=='U' || aux=='S' || aux=='T' || aux=='B'){//verificando se existe monstro
+        if(aux=='G'){ // se for o Gygas, vai lutar com ele e encerrar o programa
             
-            if(lutar(mapa,aux)){
+            if(lutar(mapa,aux)){// passando as posições que o Gygas esta
                sprintf(string,"Linha %d, Coluna %d; P: %d, k: %d\n",i,j,forca,kflash);
                inicializarItem(&item,string);
-                addItem(pilha,&item);
-               return true;
+               addItem(pilha,&item);// inserindo as posições de Gygas em uma pilha
+               return true; // retorando true para encerrar o programa e não haver mais recurssão
                
             }else{
                 mapa->mapa[i][j]=aux;
-                return false;
+                return false; //retornando false caso Ness perca para Gygas
             }
-        }else{
-           if(lutar(mapa,aux)) {
-               mapa->mapa[i][j]='+';
-               teveLuta=true;
+        }else{// Caso não seja Gygas e sim outro monstro
+           if(lutar(mapa,aux)) {//Ness luta com o monstro
+               mapa->mapa[i][j]='+'; // adciona-se  + caso Ness venca na posição que o monstro estava
+                teveLuta=true;
                  novaForca=mapa->heroi.forca;
                  novokFlash=mapa->heroi.kflash;
                }
@@ -123,11 +124,11 @@ int movimentar(Mapa *mapa, int i, int j,Pilha* pilha,char posAntiga,int opAntiga
         }
     }
 
-     if(posAntiga=='+' && aux=='+'){
-        if(simular(opAntiga,0)){ 
+     if(posAntiga=='+' && aux=='+'){// if para sair de um loop, caso haja um
+        if(simular(opAntiga,0)){ //fazendo um simulação verificando se existe um loop
                 mapa->heroi.forca=forca;
                 mapa->heroi.kflash=kflash;
-            return false;}
+            return false;} // se exister retorna falso para sair desse loop
     }
     //Verificando os caminhos possíveis
     if(posicaoEhValida(mapa, i-1, j) && aux !='-' ){  //para cima
